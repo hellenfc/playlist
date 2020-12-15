@@ -1,0 +1,22 @@
+$background-color: #f0ece3;
+$primary-button: #0fabbc;
+$primary-button-hover:#0b7f8b;
+$correct-button:#438a5e;
+$correct-button-hover:#387550;
+$wrong-button:#c41414;
+$wrong-button-hover:#ad1414;
+$footer-color: #596e79;
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background: $background-color;
+}
+
+.footer {
+  padding: 11px 16px;
+  margin-top: auto;
+  background-color: $footer-color;
+  color: $background-color;
+}

@@ -97,8 +97,6 @@ const ContentPage = () => {
                     goDetails={goDetails}
                 />
             }       
-            <Link to={`/contenidos/detalles/${index}`}>Detalle usando path params</Link><br />
-
         </div>
 
     );

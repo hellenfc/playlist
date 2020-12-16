@@ -7,6 +7,7 @@ import './App.scss';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ContentPage from "./components/contentPage";
 import CounterPage from "./components/counterPage";
+import DetailPage from './components/detailPage';
 
 class App extends Component {
   render() {
@@ -20,6 +21,10 @@ class App extends Component {
               component={ContentPage}>
             </Route>
             <Route
+              path={'/contenidos/detalles/:id'}
+              component={DetailPage}
+            ></Route>
+            <Route
               path={"/contenidos"}
               component={ContentPage}
             ></Route>
@@ -29,8 +34,6 @@ class App extends Component {
             ></Route>
           </Switch>
         </Router>
-
-        {/* <Routes /> */}
         <Footer></Footer>
       </div>
     );

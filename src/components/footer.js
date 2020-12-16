@@ -2,7 +2,6 @@ import React from 'react';
 import Container from "@material-ui/core/Container";
 
 const Footer = () => {
-    // const classes = useStyles();
 
     return (
         <footer className="footer">

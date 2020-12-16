@@ -4,6 +4,13 @@ body {
   font-family: sans-serif;
   background: #f0ece3; }
 
+.root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; }
+  .root Button {
+    font-weight: bold; }
+
 .footer {
   padding: 11px 16px;
   margin-top: auto;

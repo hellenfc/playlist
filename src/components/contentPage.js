@@ -1,5 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import Slider from './slider'
+import React, { useEffect, useState  } from 'react';
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory, Link } from "react-router-dom";
+
+import Slider from './slider';
+import { addContent } from "../modules/action";
+import axios from 'axios';
 
 const ContentPage = () => {
 
@@ -9,47 +14,11 @@ const ContentPage = () => {
     const [currentImage, setCurrentImage] = useState(null);
     const [items, setItems] = useState({});
     const [index, setIndex] = useState(0); 
+    const dispatch = useDispatch();
+    const history = useHistory();
 
-    useEffect(() => {
-        setLoading(true);
-        const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-        const targetUrl = 'https://mychannel.nunchee.tv/api/generic/playlists/details/5b845b8346cc29000e4f186a';
-
-        fetch(proxyUrl + targetUrl)
-            .then((response) => response.json())
-            .then((data) => {
-                setLoading(false);
-                console.log('data', data.data)
-                setItems(data.data.items);
-                setValues(0, data.data.items[0], data.data.items[0].images);
-            })
-            .catch((e) => {
-                setLoading(false);
-                setError('fetch failed');
-            });
-    }, [])
-
-    const slideRight = () => {
-        console.log('RIGHT')
-        setValues((index + 1) % items.length, items[(index + 1) % items.length], items[(index + 1) % items.length].images)
-    };
-
-    const slideLeft = () => {
-        console.log('LEFT')
-        const nextIndex = index - 1;
-        if (nextIndex < 0) {
-            console.log('>', items.length - 1)
-            setValues(items.length - 1, items[items.length - 1], items[items.length - 1].images);
-        } else {
-            setValues(nextIndex, items[nextIndex], items[nextIndex].images);
-        }
-    };
-
-    const setValues = (index, item, images) => {
-        setIndex(index);
-        setCurrentItem(item);
-        setImage(images);
-    }
+    const state = useSelector((state) => state);
+    console.log('state', state)
 
     const setImage = (images) => {
         let hasBackdrop = false;
@@ -59,6 +28,50 @@ const ContentPage = () => {
                 setCurrentImage(`https://assets.nunchee.com/out/${images[item]._id}/original/${images[item].type}/75.jpeg`)
             }
         }
+    }
+
+    const setValues = (index, item, images) => {
+        setIndex(index);
+        setCurrentItem(item);
+        setImage(images);
+    }
+    
+    useEffect(() => {
+        setLoading(true);
+        const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+        const targetUrl = 'https://mychannel.nunchee.tv/api/generic/playlists/details/5b845b8346cc29000e4f186a';
+
+        axios.get(proxyUrl + targetUrl)
+            .then((response) => {
+                console.log('response', response.data.data)
+                setLoading(false);
+                setItems(response.data.data.items);
+                setValues(0, response.data.data.items[0], response.data.data.items[0].images);
+            })
+            .catch((e) => {
+                setLoading(false);
+                setError('fetch failed');
+            });
+    }, [])
+
+    const slideRight = () => {
+        setValues((index + 1) % items.length, items[(index + 1) % items.length], items[(index + 1) % items.length].images)
+    };
+
+    const slideLeft = () => {
+        const nextIndex = index - 1;
+        if (nextIndex < 0) {
+            console.log('>', items.length - 1)
+            setValues(items.length - 1, items[items.length - 1], items[items.length - 1].images);
+        } else {
+            setValues(nextIndex, items[nextIndex], items[nextIndex].images);
+        }
+    };
+
+    const goDetails = () => {
+        dispatch(addContent(currentItem));
+        console.log('current', currentItem)
+        history.push(`/contenidos/detalles/${currentItem._id}`);
     }
 
     if (loading) {
@@ -81,8 +94,11 @@ const ContentPage = () => {
                     image={currentImage}
                     slideLeft={slideLeft}
                     slideRight={slideRight}
+                    goDetails={goDetails}
                 />
-            }
+            }       
+            <Link to={`/contenidos/detalles/${index}`}>Detalle usando path params</Link><br />
+
         </div>
 
     );

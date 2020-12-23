@@ -7,7 +7,7 @@ import CounterPage from "./components/counterPage";
 export default class Routes extends Component {
   render() {
     return (
-      <Router basename="/">
+      <Router basename="/playlist-test">
         <Switch>
           <Route exact 
           path="/" 

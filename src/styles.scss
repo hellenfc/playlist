@@ -18,9 +18,82 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  Button{
-     font-weight: bold;
+
+}
+
+.page {
+  padding: 30px;
+}
+
+.counter-page{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  .counter-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-bottom: 10px;
+    .counter-value {
+      padding: 0 40px 0 40px;
+      width: 20px;
+    }
   }
+  .total {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.slider{
+  position: relative;
+
+  .slider-image{
+    width: 100%;
+  }
+
+  .slider-title {
+    color: white;
+    top: 63%;
+    padding-left: 20px;
+    position: absolute;
+  }
+
+  .slider-description{
+    top: 67%;
+    height: 89px;
+    width: 50%;
+    padding: 20px;
+    position: absolute;
+    overflow: hidden;
+    color: white
+  }
+  
+  .left-button{
+    top: 50%;
+    left: 2%;
+    position: absolute;
+  }
+
+  .right-button{
+    top: 50%;
+    left: 91%;
+    position: absolute;
+  }
+  .details-button{
+    top: 87%;
+    left: 54%;
+    position: absolute;
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+}
+
+.detail-image{
+  width:100%;
 }
 
 .footer {

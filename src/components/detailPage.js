@@ -43,12 +43,12 @@ const DetailPage = ({ match }) => {
     }
 
     return (
-        <div>
-            <p>Details</p>
+        <div className="page">
+            <h1 className="header" >Details</h1>
             {
                 currentItem && currentItem.title &&
                 <div> 
-                    <img src={currentImage} alt={currentItem.title.original} />
+                    <img className="detail-image" src={currentImage} alt={currentItem.title.original} />
                     <p>{currentItem.title.original}</p>
                     <p>{currentItem.description.plain.original}</p>
                 </div>

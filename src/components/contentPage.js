@@ -18,7 +18,6 @@ const ContentPage = () => {
     const history = useHistory();
 
     const state = useSelector((state) => state);
-    console.log('state', state)
 
     const setImage = (images) => {
         let hasBackdrop = false;
@@ -43,7 +42,6 @@ const ContentPage = () => {
 
         axios.get(proxyUrl + targetUrl)
             .then((response) => {
-                console.log('response', response.data.data)
                 setLoading(false);
                 setItems(response.data.data.items);
                 setValues(0, response.data.data.items[0], response.data.data.items[0].images);
@@ -61,7 +59,6 @@ const ContentPage = () => {
     const slideLeft = () => {
         const nextIndex = index - 1;
         if (nextIndex < 0) {
-            console.log('>', items.length - 1)
             setValues(items.length - 1, items[items.length - 1], items[items.length - 1].images);
         } else {
             setValues(nextIndex, items[nextIndex], items[nextIndex].images);
@@ -70,7 +67,6 @@ const ContentPage = () => {
 
     const goDetails = () => {
         dispatch(addContent(currentItem));
-        console.log('current', currentItem)
         history.push(`/contenidos/detalles/${currentItem._id}`);
     }
 
@@ -83,10 +79,7 @@ const ContentPage = () => {
     }
 
     return (
-        <div>
-            <h1>
-                Content
-            </h1>
+        <div className="page">
             {currentItem && currentItem.title &&
                 <Slider
                     title={currentItem.title.original}

@@ -2,7 +2,7 @@
   "name": "playlist",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://hellenfc.github.io/playlist",
+  "homepage": "https://hellenfc.github.io/playlist-test",
   "dependencies": {
     "@material-ui/core": "^4.10.1",
     "@material-ui/icons": "^4.9.1",

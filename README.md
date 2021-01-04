@@ -4,6 +4,9 @@
 - npm install
 - npm run start
 
+## View at
+https://hellenfc.github.io/playlist-test/
+
 ## React Questions
 - Explique la diferencia entre inputs controlados y no controlados? 
 Los inputs controlados utilizan el state de React para manejar los valores, en el caso de los no controlados utilizan refs o eventos para poder acceder a los valores.

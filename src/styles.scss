@@ -1,42 +1,96 @@
 $background-color: #f0ece3;
-$primary-button: #0fabbc;
-$primary-button-hover:#0b7f8b;
-$correct-button:#438a5e;
-$correct-button-hover:#387550;
-$wrong-button:#c41414;
-$wrong-button-hover:#ad1414;
-$footer-color: #596e79;
-
+$footer-color: #333;
+$button-color: gray;
 body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
   background: $background-color;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
 }
 
 .root {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-
 }
 
 .page {
-  padding: 30px;
+  padding: 46px 30px 80px 30px;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+
+  .logo{
+    display: flex;
+    height: 47px;
+    width: 60px;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      height: 40px;
+      width: 40px;
+    }
+  }
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: $footer-color;
+    width: 100%;
+    li {
+      float: left;
+      a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        &:hover {
+          background-color: #111;
+          cursor: pointer; 
+        }
+      }
+    }
+  }
+}
+
+.content-page {
+  padding-bottom: 49px;
+  .content-history {
+    padding: 30px;
+  }
 }
 
 .counter-page{
   display: flex;
   flex-direction: column;
   justify-content: center;
-  .counter-wrapper {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    padding-bottom: 10px;
-    .counter-value {
-      padding: 0 40px 0 40px;
-      width: 20px;
+  .counter-container{
+    text-align: center;
+    .counter-wrapper {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      padding-bottom: 10px;
+      .counter-value {
+        display: flex;
+        justify-content: center;
+        padding: 0 40px 0 40px;
+        width: 20px;
+      }
     }
   }
   .total {
@@ -47,58 +101,118 @@ body {
 
 .slider{
   position: relative;
+  display: flex;
+  flex-direction: column;
+  &:after{
+      content: ""; 
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: linear-gradient( transparent, black);
+      opacity: .7;
+    }
 
   .slider-image{
     width: 100%;
   }
 
+  .content{
+    position: absolute;
+    top: 63%;
+    z-index: 1;
+    padding-left: 30px;
+  }
+
   .slider-title {
     color: white;
-    top: 63%;
-    padding-left: 20px;
-    position: absolute;
   }
 
   .slider-description{
-    top: 67%;
-    height: 89px;
-    width: 50%;
-    padding: 20px;
-    position: absolute;
+    height: 56px;
+    width: 80%;
     overflow: hidden;
-    color: white
+    color: white;
+    z-index: 1;
+  }
+
+  .arrow-button{
+    width: 3.6rem;
+    border: none;
+    z-index: 1;
+    background-color: $button-color;
+    border-radius: 3.6rem;
+    cursor: pointer;
+    display: inline-block;
+    height: 3.6rem;
+    margin: 0 5px;
+    opacity: .4;
+     outline:none;
+    &:hover{
+      opacity: 1;
+    }
   }
   
   .left-button{
     top: 50%;
-    left: 2%;
+    left: 30px;
     position: absolute;
+
+    @extend .arrow-button;
   }
 
   .right-button{
     top: 50%;
-    left: 91%;
+    right: 30px;
     position: absolute;
+    z-index: 1;
+    
+    @extend .arrow-button;
   }
+
   .details-button{
-    top: 87%;
-    left: 54%;
-    position: absolute;
+    padding: 3px 30px;
+
+    background-color: $button-color;
+    border: none;
+    border-radius: 0.5rem;
+    opacity: .4;
+    cursor: pointer;
+    color: white;
+    font-size: 13px;
+    outline:none;
+    &:hover{
+      opacity: 1;
+    }
   }
 }
 
-.header {
+.main-title {
   display: flex;
   justify-content: center;
 }
 
-.detail-image{
-  width:100%;
+.detail-wrapper {
+  .detail-image{
+    width: 40%;
+    float: left;
+    margin-right: 10px;
+  }
 }
 
+
 .footer {
-  padding: 11px 16px;
+  p {
+    font-size: 12px;
+  }
+  padding: 11px;
   margin-top: auto;
   background-color: $footer-color;
   color: $background-color;
+  position: fixed;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  z-index: 2;
 }

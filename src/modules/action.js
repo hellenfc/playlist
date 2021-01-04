@@ -1,6 +1,5 @@
-import { ADD_CONTENT, ADD_TOTAL, SUBTRACT_TOTAL, CLEAR_TOTAL } from "./types";
+import { ADD_CONTENT, ADD_TOTAL, SUBTRACT_TOTAL, CLEAR_TOTAL, CURRENT_INDEX } from "./types";
 
-// actions
 const addContent = (content) => {
   return {
     type: ADD_CONTENT,
@@ -28,4 +27,11 @@ const clearTotal = () => {
   };
 };
 
-export { addContent, addTotal, subtractTotal, clearTotal, };
+const setCurrentIndex = (value) => {
+  return {
+    type: CURRENT_INDEX,
+    payload: value
+  };
+};
+
+export { addContent, addTotal, subtractTotal, clearTotal, setCurrentIndex, };

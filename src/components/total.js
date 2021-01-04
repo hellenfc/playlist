@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 
 const Total = () => {
     const state = useSelector((state) => state);
-    console.log('state', state)
     return (
         <div className="total">
            <p>Total: {state.counterReducer}</p>

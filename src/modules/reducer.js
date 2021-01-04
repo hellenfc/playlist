@@ -1,4 +1,4 @@
-import { ADD_CONTENT, ADD_TOTAL, SUBTRACT_TOTAL, CLEAR_TOTAL } from "./types";
+import { ADD_CONTENT, ADD_TOTAL, SUBTRACT_TOTAL, CLEAR_TOTAL, CURRENT_INDEX  } from "./types";
 import { combineReducers } from "redux";
 
 const playlistReducer = (state = [], action) => {
@@ -10,15 +10,23 @@ const playlistReducer = (state = [], action) => {
   }
 }
 
+const currentItem = (state=0, action) => {
+  switch (action.type) {
+    case CURRENT_INDEX:
+      return action.payload;
+    default:
+      return state;
+  }
+  
+}
+
 const counterReducer = (state = 0, action) => {
   switch (action.type) {
     case ADD_TOTAL:
-      
       return state + action.payload;
     case SUBTRACT_TOTAL:
       return state - action.payload;
     case CLEAR_TOTAL:
-      console.log('action paylo', action.payload);
       return 0;
     default:
       return state;
@@ -27,6 +35,7 @@ const counterReducer = (state = 0, action) => {
 
 const playlistApp = combineReducers({
   playlistReducer,
+  currentItem,
   counterReducer
 });
 

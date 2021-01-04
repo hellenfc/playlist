@@ -1,9 +1,9 @@
 import React, { useEffect, useState  } from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import Slider from './slider';
-import { addContent } from "../modules/action";
+import { addContent, setCurrentIndex } from "../modules/action";
 import axios from 'axios';
 
 const ContentPage = () => {
@@ -11,7 +11,7 @@ const ContentPage = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [currentItem, setCurrentItem] = useState({});
-    const [currentImage, setCurrentImage] = useState(null);
+    const [currentImage, setCurrentImage] = useState('../assets/img.png');
     const [items, setItems] = useState({});
     const [index, setIndex] = useState(0); 
     const dispatch = useDispatch();
@@ -19,20 +19,21 @@ const ContentPage = () => {
 
     const state = useSelector((state) => state);
 
-    const setImage = (images) => {
-        let hasBackdrop = false;
+    const setImage = (images, type) => {
+        let imageIsSet = false;
         for (const item in images) {
-            if (images[item].type === "backdrop" && !hasBackdrop) {
-                hasBackdrop = true;
+            if (images[item].type === type && !imageIsSet) {
+                imageIsSet = true;
                 setCurrentImage(`https://assets.nunchee.com/out/${images[item]._id}/original/${images[item].type}/75.jpeg`)
             }
         }
     }
 
     const setValues = (index, item, images) => {
+        dispatch(setCurrentIndex(index));
         setIndex(index);
         setCurrentItem(item);
-        setImage(images);
+        setImage(images, "backdrop");
     }
     
     useEffect(() => {
@@ -44,7 +45,7 @@ const ContentPage = () => {
             .then((response) => {
                 setLoading(false);
                 setItems(response.data.data.items);
-                setValues(0, response.data.data.items[0], response.data.data.items[0].images);
+                setValues(state.currentItem, response.data.data.items[state.currentItem], response.data.data.items[state.currentItem].images);
             })
             .catch((e) => {
                 setLoading(false);
@@ -79,7 +80,7 @@ const ContentPage = () => {
     }
 
     return (
-        <div className="page">
+        <div className="content-page">
             {currentItem && currentItem.title &&
                 <Slider
                     title={currentItem.title.original}
@@ -89,7 +90,17 @@ const ContentPage = () => {
                     slideRight={slideRight}
                     goDetails={goDetails}
                 />
-            }       
+            }      
+            {state.playlistReducer.length !== 0 && 
+            <div className="content-history">
+                <h3>History</h3> 
+                <ul>
+                    {state.playlistReducer.map((item, i) => {
+                        return <li>{item.title.original}</li>
+                    })}
+                </ul>
+            </div>
+            }
         </div>
 
     );

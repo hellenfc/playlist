@@ -16,7 +16,13 @@ const CounterPage = () => {
     const addNewCounter = () => {
         setCounter([...counters, index + 1]);
         setIndex(index + 1);
+        window.scrollTo(0, document.body.scrollHeight);
     }
+
+    useEffect(() => {
+        window.scrollTo(0, document.body.scrollHeight);
+
+    }, [counters])
 
     useEffect(() => {
         dispatch(clearTotal());
@@ -24,7 +30,7 @@ const CounterPage = () => {
 
     return (
         <div className="page counter-page">
-            <h1 className="header" >Counter</h1>
+            <h1 className="main-title" >Counter</h1>
             <Total></Total>
             {counters.map((item, i) => {
                 return <Counter incrementValue={i + 1} id={i + 1} key={i + 1}></Counter>

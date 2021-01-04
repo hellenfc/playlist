@@ -19,11 +19,11 @@ En el caso de class componentes se puede hacer uso de shouldComponentUpdate or e
 Los HOC toman un componente y retorna un nuevo componente, este componente no es modificado, este es envuelto en otro componente que lo mejorará con funciones y data.
 Se puede ver su uso al utilizarse `withRouter()` de `react-router`, en donde un componente por ejemplo `NavBar` se retorna de esta manera `withRouter(NavBar)` permitiendo tener acceso a match, location y history dentro del componente `Navbar` al ser renderizado.
 
-import { withRouter } from 'react-router-dom';
-function NavBar (){ 
-  // acceso a props.history, props.location and props.match
-  return <p>Navbar</p>
-}
+import { withRouter } from 'react-router-dom';<br />
+function NavBar (){<br />
+  // acceso a props.history, props.location and props.match<br />
+  return Navbar<br />
+}<br />
 export default withRouter(NavBar)
 
 - Que es React Redux ? 

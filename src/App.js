@@ -13,7 +13,7 @@ class App extends Component {
   render() {
     return (
       <div className="root">
-        <Router basename="/">
+        <Router basename="/playlist-test">
           <Header></Header>
           <Switch>
             <Route exact

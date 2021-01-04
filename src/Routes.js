@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import ContentPage from "./components/contentPage";
 import CounterPage from "./components/counterPage";
@@ -9,9 +9,10 @@ export default class Routes extends Component {
     return (
       <Router basename="/playlist-test">
         <Switch>
-          <Route exact 
-          path="/" 
-          component={ContentPage}>
+          <Route
+            exact
+            path={"/"}
+            component={ContentPage}>
           </Route>
           <Route
             path={"/contenidos"}
